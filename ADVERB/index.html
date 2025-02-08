@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100 ta eng ko'p ishlatiladigan ravishlar</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h2>100 ta eng ko'p ishlatiladigan ravishlar</h2>
+    <a href="../index.html">>>BOSH MENYU</a>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Adverb (Ravish)</th>
+            <th>Synonym (Sinonim)</th>
+            <th>Meaning (Ma'nosi)</th>
+        </tr>
+        <script>
+            const adverbs = [
+                ["Quickly", "Rapidly", "Tez"],
+                ["Slowly", "Gradually", "Sekin"],
+                ["Happily", "Joyfully", "Baxtli holda"],
+                ["Sadly", "Mournfully", "Qayg‘uli holda"],
+                ["Angrily", "Furiously", "G‘azab bilan"],
+                ["Silently", "Quietly", "Jim"],
+                ["Loudly", "Noisily", "Baland ovoz bilan"],
+                ["Carefully", "Cautiously", "Diqqat bilan"],
+                ["Carelessly", "Recklessly", "Ehtiyotsiz ravishda"],
+                ["Easily", "Effortlessly", "Osonlikcha"],
+                ["Hardly", "Scarcely", "Deyarli yo‘q"],
+                ["Frequently", "Often", "Tez-tez"],
+                ["Rarely", "Seldom", "Kamdan-kam"],
+                ["Exactly", "Precisely", "Aynan"],
+                ["Roughly", "Approximately", "Taxminan"],
+                ["Immediately", "Instantly", "Darhol"],
+                ["Eventually", "Finally", "Oxir-oqibat"],
+                ["Gradually", "Slowly", "Asta-sekin"],
+                ["Completely", "Totally", "To‘liq"],
+                ["Partially", "Incompletely", "Qisman"],
+                ["Mostly", "Predominantly", "Ko‘pincha"],
+                ["Gently", "Softly", "Muloyimlik bilan"],
+                ["Firmly", "Strongly", "Qat’iy"],
+                ["Hopefully", "Optimistically", "Umid bilan"],
+                ["Hopelessly", "Despairingly", "Umidsiz"],
+                ["Briefly", "Concisely", "Qisqacha"],
+                ["Boldly", "Bravely", "Jasorat bilan"],
+                ["Kindly", "Nicely", "Mehribonlik bilan"],
+                ["Neatly", "Orderly", "Toza va ozoda"],
+                ["Wisely", "Intelligently", "Aqlli ravishda"],
+                ["Softly", "Gently", "Muloyimlik bilan"],
+                ["Foolishly", "Stupidly", "Aqldan ozgancha"],
+                ["Brilliantly", "Excellently", "Zo‘r darajada"],
+                ["Fairly", "Justly", "Adolatli ravishda"],
+                ["Openly", "Frankly", "Ochiqchasiga"],
+                ["Severely", "Harshly", "Qattiq"],
+                ["Merrily", "Cheerfully", "Quvnoq holda"],
+                ["Mysteriously", "Enigmatically", "Sirli ravishda"],
+                ["Deliberately", "Purposely", "Ataylab"],
+                ["Surprisingly", "Astonishingly", "Hayratda qoldiruvchi"],
+                ["Accidentally", "Unintentionally", "Tasodifan"],
+                ["Sincerely", "Honestly", "Samimiy ravishda"],
+                ["Eagerly", "Excitedly", "Ishtiyoq bilan"],
+                ["Rarely", "Seldom", "Kamdan-kam"],
+                ["Vividly", "Clearly", "Aniq va ravshan"],
+                ["Independently", "Freely", "Mustaqil ravishda"],
+                ["Harshly", "Severely", "Qattiq va dag‘al"],
+                ["Utterly", "Absolutely", "Mutlaq"],
+                ["Lightly", "Gently", "Yengil ravishda"],
+                ["Persistently", "Continuously", "Uzluksiz"],
+                ["Regularly", "Consistently", "Muntazam"],
+                ["Randomly", "Unsystematically", "Tasodifiy"],
+                ["Entirely", "Wholly", "To‘liq"],
+                ["Lazily", "Idly", "Dangasalik bilan"],
+                ["Unnecessarily", "Needlessly", "Keraksiz ravishda"],
+                ["Restlessly", "Uneasily", "Tinchlanmay"],
+                ["Anxiously", "Nervously", "Asabiy holda"],
+                ["Evidently", "Clearly", "Ko‘rinib turibdi"],
+                ["Devotedly", "Loyally", "Sadoqat bilan"],
+                ["Thoroughly", "Completely", "Batafsil"],
+                ["Impatiently", "Restlessly", "Sabr qilmay"],
+                ["Frighteningly", "Terrifyingly", "Qo‘rqinchli darajada"],
+                ["Promptly", "Immediately", "Zudlik bilan"]
+            ];
+
+            document.write(adverbs.map((adv, index) => 
+                `<tr><td>${index + 1}</td><td>${adv[0]}</td><td>${adv[1]}</td><td>${adv[2]}</td></tr>`
+            ).join(''));
+        </script>
+    </table>
+</body>
+</html>
