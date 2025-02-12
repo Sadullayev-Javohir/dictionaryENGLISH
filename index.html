@@ -1,91 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>English</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-      }
-      body {
-        padding: 20px;
-        font-family: Arial, sans-serif;
-      }
-      h1 {
-        text-align: center;
-        margin: 50px 0;
-      }
-      a {
-        margin-right: 10px;
-        color: blueviolet;
-        font-weight: 900;
-        font-size: 25px;
-        padding: 20px 40px;
-      }
-      .flex {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: space-around;
-        align-items: center;
-      }
-      div {
-        margin-bottom: 20px;
-        border: 2px solid black;
-        width: fit-content;
-        border-radius: 20px;
-        padding: 20px 40px;
-      }
-      div div {
-        background-color: antiquewhite;
-        border: 4px solid red;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>INGLIZCHA SO'ZLAR LUG'ATI</h1>
-    <div class="flex">
-      <div>
-        <a href="./ADJECTIVES/index.html">ADJECTIVES</a>
-      </div>
-      <div>
-        <a href="./ADVERB/index.html">ADVERBS</a>
-      </div>
 
-      <div>
-        <a href="./LINKING WORDS/index.html">LINKING WORDS</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      /* margin: 0;
+      padding: 0; */
+      /* box-sizing: border-box; */
+      text-decoration: none;
+    }
+
+    /* From Uiverse.io by gharsh11032000 */
+    .card {
+      position: relative;
+      width: 190px;
+      height: 254px;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      padding: 12px;
+      gap: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      left: -5px;
+      margin: auto;
+      width: 200px;
+      height: 264px;
+      border-radius: 10px;
+      background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+      z-index: -10;
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card::after {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+      transform: translate3d(0, 0, 0) scale(0.95);
+      filter: blur(20px);
+    }
+
+    .heading {
+      font-size: 20px;
+      text-transform: capitalize;
+      font-weight: 700;
+    }
+
+    .card p:not(.heading) {
+      font-size: 14px;
+    }
+
+    .card p:last-child {
+      color: #e81cff;
+      font-weight: 600;
+    }
+
+    .card:hover::after {
+      filter: blur(30px);
+    }
+
+    .card:hover::before {
+      transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+    }
+
+    .card-half {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align: center;">VOCABULARY</h1>
+  <br>
+  <br>
+  <div class="card-half">
+    <a href="./IRREGULAR/index.html">
+      <div class="card">
+        <p>IRREGULAR VERBS</p>
       </div>
-      <div>
-        <a href="./NOUN/index.html">NOUNS</a>
+    </a>
+    <a href="./VERBS/index.html">
+      <div class="card">
+        <p>VERBS</p>
       </div>
-      <div>
-        <a href="./AWAY/index.html">PHRASAL AWAY</a>
+    </a>
+    <a href="./ADJECTIVES/index.html">
+      <div class="card">
+        <p>ADJECTIVES</p>
       </div>
-      <div>
-        <a href="./DOWN/index.html">PHRASAL DOWN</a>
+    </a>
+    <a href="./ADVERB/index.html">
+      <div class="card">
+        <p>ADVERBS</p>
       </div>
-      <div>
-        <a href="./IN/index.html">PHRASAL IN</a>
+    </a>
+    <a href="./LINKING WORDS/index.html">
+      <div class="card">
+        <p>LINKING WORDS</p>
       </div>
-      <div>
-        <a href="./OFF/index.html">PHRASAL OFF</a>
+    </a>
+    <a href="./NOUN/index.html">
+      <div class="card">
+        <p>NOUNS</p>
       </div>
-      <div>
-        <a href="./ON/index.html">PHRASAL ON</a>
+    </a>
+    <a href="./AWAY/index.html">
+      <div class="card">
+        <p>PHRASAL AWAY</p>
       </div>
-      <div>
-        <a href="./OUT/index.html">PHRASAL OUT</a>
+    </a>
+    <a href="./DOWN/index.html">
+      <div class="card">
+        <p>PHRASAL DOWN</p>
       </div>
-      <div>
-        <a href="./UP/index.html">PHRASAL UP</a>
+    </a>
+    <a href="./IN/index.html">
+      <div class="card">
+        <p>PHRASAL IN</p>
       </div>
-      <div>
-        <a href="./VERBS/index.html">VERBS</a>
+    </a>
+    <a href="./OFF/index.html">
+      <div class="card">
+        <p>PHRASAL OFF</p>
       </div>
-    </div>
-  </body>
+    </a>
+    <a href="./ON/index.html">
+      <div class="card">
+        <p>PHRASAL ON</p>
+      </div>
+    </a>
+    <a href="./OUT/index.html">
+      <div class="card">
+        <p>PHRASAL OUT</p>
+      </div>
+    </a>
+    <a href="./UP/index.html">
+      <div class="card">
+        <p>PHRASAL UP</p>
+      </div>
+    </a>
+  </div>
+</body>
+
 </html>

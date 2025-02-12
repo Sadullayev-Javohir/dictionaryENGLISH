@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +10,27 @@
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid black;
             padding: 8px;
             text-align: left;
+            font-size: 25px;
+            font-weight: 900;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         a {
             text-decoration: none;
             color: blue;
         }
     </style>
 </head>
+
 <body>
     <h2>100 ta eng ko'p ishlatiladigan ravishlar</h2>
     <a href="../index.html">>>BOSH MENYU</a>
@@ -98,12 +106,13 @@
                 ["Impatiently", "Restlessly", "Sabr qilmay"],
                 ["Frighteningly", "Terrifyingly", "Qo‘rqinchli darajada"],
                 ["Promptly", "Immediately", "Zudlik bilan"]
-            ];
+            ]
 
-            document.write(adverbs.map((adv, index) => 
+            document.write(adverbs.map((adv, index) =>
                 `<tr><td>${index + 1}</td><td>${adv[0]}</td><td>${adv[1]}</td><td>${adv[2]}</td></tr>`
             ).join(''));
         </script>
     </table>
 </body>
+
 </html>
