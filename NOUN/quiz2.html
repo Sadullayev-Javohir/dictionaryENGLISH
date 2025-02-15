@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Quiz</title>
+  <style>
+		body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f4f9;
+}
+
+.quiz-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-header h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.answers {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+button.incorrect {
+  background-color: #f44336;
+  color: white;
+}
+
+.score {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.result {
+  text-align: center;
+  font-size: 20px;
+}
+a {
+	font-size: 25px;
+}
+	</style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="quiz-header">
+      <h1>Vocabulary Quiz</h1>
+    </div>
+    <div class="quiz-body">
+      <div id="question" class="question">Loading...</div>
+      <div id="answers" class="answers">
+        <!-- Buttons for answers will be here -->
+      </div>
+      <div id="score" class="score">
+        Correct answers: 0
+      </div>
+      <button id="next-button" class="next-button" onclick="nextQuestion()" disabled>Next Question</button>
+    </div>
+    <div id="result" class="result" style="display: none;">
+      <h2>Quiz Finished!</h2>
+      <p>Your score: <span id="final-score"></span> / 10</p>
+      <button onclick="restartQuiz()">Restart</button>
+    </div>
+  </div>
+  <a href="./index.html">NOUNS</a>
+
+
+  <script>
+		let currentQuestion = 0;
+let score = 0;
+let questions = [];
+let selectedAnswer = null;
+
+const vocabularyData = [
+{ word: "Moment", translation: "Vaqt" },
+{ word: "Individual", translation: "Shaxs" },
+{ word: "Annus", translation: "Yil" },
+{ word: "Method", translation: "Yo'l" },
+{ word: "Date", translation: "Kun" },
+{ word: "Object", translation: "Narsa" },
+{ word: "Gentleman", translation: "Erkak" },
+{ word: "Earth", translation: "Dunyo" },
+{ word: "Existence", translation: "Hayot" },
+{ word: "Palm", translation: "Qo'l" },
+{ word: "Section", translation: "Qism" },
+{ word: "Kid", translation: "Bola" },
+{ word: "Vision", translation: "Ko'z" },
+{ word: "Lady", translation: "Ayol" },
+{ word: "Location", translation: "Joy" },
+{ word: "Job", translation: "Ish" },
+{ word: "Seven days", translation: "Hafta" },
+{ word: "Instance", translation: "Holat" },
+{ word: "Dot", translation: "Nuqta" },
+{ word: "Administration", translation: "Hukumat" },
+{ word: "Firm", translation: "Kompaniya" },
+{ word: "Digit", translation: "Raqam" },
+{ word: "Team", translation: "Guruh" },
+{ word: "Issue", translation: "Muammo" },
+{ word: "Reality", translation: "Haqiqat" },
+{ word: "Male", translation: "Erkak" },
+{ word: "Lady", translation: "Ayol" },
+{ word: "Kid", translation: "Bola" },
+{ word: "Academy", translation: "Maktab" },
+{ word: "Nation", translation: "Mamlakat" },
+{ word: "Household", translation: "Oila" },
+{ word: "Pupil", translation: "Talaba" },
+{ word: "Model", translation: "Misol" },
+{ word: "Period", translation: "Oy" },
+{ word: "Inquiry", translation: "Savol" },
+{ word: "Reply", translation: "Javob" },
+{ word: "Space", translation: "Xona" },
+{ word: "Entry", translation: "Eshik" },
+{ word: "Town", translation: "Shahar" },
+{ word: "Road", translation: "Ko'cha" },
+{ word: "Companion", translation: "Do'st" },
+{ word: "Affection", translation: "Sevgi" },
+{ word: "Cash", translation: "Pul" },
+{ word: "Title", translation: "Ism" },
+{ word: "Liquid", translation: "Suv" },
+{ word: "Meal", translation: "Oziq-ovqat" },
+{ word: "Atmosphere", translation: "Havo" },
+{ word: "Vehicle", translation: "Mashina" },
+{ word: "Home", translation: "Uy" },
+{ word: "Darkness", translation: "Kecha" },
+{ word: "Dawn", translation: "Tong" },
+{ word: "Dusk", translation: "Oqshom" },
+{ word: "Work", translation: "Ish" },
+{ word: "Term", translation: "So'z" },
+{ word: "Character", translation: "Harf" },
+{ word: "Noise", translation: "Ovoz" },
+{ word: "Illumination", translation: "Yorug'lik" },
+{ word: "Volume", translation: "Kitob" },
+{ word: "Sheet", translation: "Qog'oz" },
+{ word: "Plant", translation: "Daraxt" },
+{ word: "Blossom", translation: "Gul" },
+{ word: "Stream", translation: "Daryo" },
+{ word: "Peak", translation: "Tog'" },
+{ word: "Sea", translation: "Okean" },
+{ word: "Craft", translation: "San'at" },
+{ word: "Melody", translation: "Musiqa" },
+{ word: "Movie", translation: "Film" },
+{ word: "Past", translation: "Tarix" },
+{ word: "Knowledge", translation: "Fan" },
+{ word: "PC", translation: "Kompyuter" },
+{ word: "Web", translation: "Internet" },
+{ word: "Telephone", translation: "Telefon" },
+{ word: "Play", translation: "O'yin" },
+{ word: "Group", translation: "Jamoa" },
+{ word: "Athletics", translation: "Sport" },
+{ word: "Academy", translation: "Maktab" },
+{ word: "Educator", translation: "O'qituvchi" },
+{ word: "Physician", translation: "Shifokor" },
+{ word: "Caregiver", translation: "Hamshira" },
+{ word: "Clinic", translation: "Kasalxona" },
+{ word: "Law enforcement", translation: "Politsiya" },
+{ word: "Military", translation: "Armiya" },
+{ word: "Blaze", translation: "Olov" },
+{ word: "Planet", translation: "Yer" },
+{ word: "Star", translation: "Quyosh" },
+{ word: "Satellite", translation: "Oy" },
+{ word: "Celestial body", translation: "Yulduz" },
+{ word: "Power", translation: "Energiya" },
+{ word: "Well-being", translation: "Salomatlik" },
+{ word: "Illness", translation: "Kasallik" },
+{ word: "Journey", translation: "Sayohat" },
+{ word: "Railway", translation: "Poyezd" },
+{ word: "Aircraft", translation: "Samolyot" },
+{ word: "Ship", translation: "Kema" },
+{ word: "Overpass", translation: "Ko'prik" },
+{ word: "Conflict", translation: "Urush" },
+{ word: "Harmony", translation: "Tinchlik" },
+{ word: "Strength", translation: "Kuch" },
+{ word: "Rule", translation: "Qonun" },
+{ word: "Liberty", translation: "Ozodlik" }
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  prepareQuestions();
+  showQuestion();
+});
+
+function prepareQuestions() {
+  questions = vocabularyData.map(item => {
+    const incorrectAnswers = vocabularyData
+      .filter(vocab => vocab.translation !== item.translation)
+      .map(vocab => vocab.translation)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3);
+
+    const answers = [...incorrectAnswers, item.translation]
+      .sort(() => 0.5 - Math.random());
+
+    return {
+      word: item.word,
+      correctAnswer: item.translation,
+      answers: answers
+    };
+  });
+}
+
+function showQuestion() {
+  if (currentQuestion < questions.length) {
+    const question = questions[currentQuestion];
+    document.getElementById("question").textContent = question.word;
+    document.getElementById("answers").innerHTML = question.answers
+      .map(answer => `<button onclick="checkAnswer('${answer}')" class="answer-btn">${answer}</button>`)
+      .join("");
+    document.getElementById("score").textContent = `Correct answers: ${score}`;
+    document.getElementById("next-button").disabled = true;
+  } else {
+    showResult();
+  }
+}
+
+function checkAnswer(answer) {
+  const correct = answer === questions[currentQuestion].correctAnswer;
+  const answerButtons = document.querySelectorAll(".answer-btn");
+
+  answerButtons.forEach(button => {
+    button.disabled = true;
+    if (button.textContent === questions[currentQuestion].correctAnswer) {
+      button.classList.add("correct");
+    } else if (button.textContent === answer) {
+      button.classList.add("incorrect");
+    }
+  });
+
+  if (correct) {
+    score++;
+  }
+  document.getElementById("next-button").disabled = false;
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  showQuestion();
+}
+
+function showResult() {
+  document.getElementById("quiz-body").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("final-score").textContent = score;
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz-body").style.display = "block";
+  showQuestion();
+}
+
+	</script>
+</body>
+</html>
