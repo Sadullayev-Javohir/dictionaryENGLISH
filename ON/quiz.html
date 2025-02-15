@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phrasal Verbs Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: #282a36;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6272a4;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #50fa7b;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a {
+            font-size: 25px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="result"></div>
+    </div>
+    <a href="../index.html">>>BOSH MENYU</a>
+    <script>
+        const questions = [
+            { verb: "Add on", correct: "Attach", options: ["Attach", "Cause", "Wear"] },
+            { verb: "Bring on", correct: "Cause", options: ["Attach", "Cause", "Visit"] },
+            { verb: "Call on", correct: "Visit", options: ["Visit", "Wear", "Continue"] },
+            { verb: "Carry on", correct: "Continue", options: ["Attach", "Cause", "Continue"] },
+            { verb: "Catch on", correct: "Understand", options: ["Understand", "Prolong", "Wear"] },
+            { verb: "Check on", correct: "Verify", options: ["Verify", "Continue", "Wear"] },
+            { verb: "Count on", correct: "Rely", options: ["Rely", "Verify", "Wait"] },
+            { verb: "Drag on", correct: "Prolong", options: ["Prolong", "Cause", "Accept"] },
+            { verb: "Focus on", correct: "Concentrate", options: ["Concentrate", "Wear", "Remain"] },
+            { verb: "Get on", correct: "Board", options: ["Board", "Wear", "Proceed"] },
+            { verb: "Hold on", correct: "Wait", options: ["Wait", "Rely", "Prolong"] },
+            { verb: "Keep on", correct: "Persist", options: ["Persist", "Wear", "Continue"] },
+            { verb: "Log on", correct: "Access", options: ["Access", "Verify", "Wait"] },
+            { verb: "Move on", correct: "Proceed", options: ["Proceed", "Accept", "Wear"] },
+            { verb: "Pass on", correct: "Transmit", options: ["Transmit", "Proceed", "Accept"] },
+            { verb: "Put on", correct: "Wear", options: ["Wear", "Attach", "Activate"] },
+            { verb: "Rely on", correct: "Depend", options: ["Depend", "Wait", "Accept"] },
+            { verb: "Stay on", correct: "Remain", options: ["Remain", "Accept", "Wear"] },
+            { verb: "Take on", correct: "Accept", options: ["Accept", "Activate", "Wait"] },
+            { verb: "Turn on", correct: "Activate", options: ["Activate", "Wear", "Proceed"] }
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            questionElement.textContent = `Choose the correct synonym for: ${question.verb}`;
+            optionsElement.innerHTML = "";
+
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestionIndex].correct) {
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "#50fa7b";
+            } else {
+                resultElement.textContent = "Wrong! Try again.";
+                resultElement.style.color = "#ff5555";
+            }
+
+            setTimeout(() => {
+                resultElement.textContent = "";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsElement.innerHTML = "";
+                }
+            }, 1000);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

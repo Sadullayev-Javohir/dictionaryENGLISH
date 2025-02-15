@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phrasal Verbs Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: #282a36;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6272a4;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #50fa7b;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a {
+            font-size: 25px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="result"></div>
+    </div>
+    <a href="../index.html">>>BOSH MENYU</a>
+    <script>
+        const questions = [
+            { verb: "Back out", correct: "Withdraw", options: ["Withdraw", "Escape", "Announce"] },
+            { verb: "Blow out", correct: "Extinguish", options: ["Extinguish", "Appear", "Select"] },
+            { verb: "Break out", correct: "Escape", options: ["Escape", "Solve", "Distribute"] },
+            { verb: "Bring out", correct: "Reveal", options: ["Reveal", "Exit", "Depart"] },
+            { verb: "Call out", correct: "Announce", options: ["Announce", "Execute", "Select"] },
+            { verb: "Carry out", correct: "Execute", options: ["Execute", "Reveal", "Omit"] },
+            { verb: "Check out", correct: "Examine", options: ["Examine", "Select", "Watch"] },
+            { verb: "Come out", correct: "Appear", options: ["Appear", "Announce", "Distribute"] },
+            { verb: "Drop out", correct: "Quit", options: ["Quit", "Discover", "Deplete"] },
+            { verb: "Figure out", correct: "Solve", options: ["Solve", "Execute", "Wait"] },
+            { verb: "Find out", correct: "Discover", options: ["Discover", "Remove", "Omit"] },
+            { verb: "Get out", correct: "Exit", options: ["Exit", "Select", "Announce"] },
+            { verb: "Give out", correct: "Distribute", options: ["Distribute", "Solve", "Quit"] },
+            { verb: "Go out", correct: "Depart", options: ["Depart", "Exit", "Appear"] },
+            { verb: "Hand out", correct: "Distribute", options: ["Distribute", "Announce", "Watch"] },
+            { verb: "Leave out", correct: "Omit", options: ["Omit", "Remove", "Select"] },
+            { verb: "Look out", correct: "Watch", options: ["Watch", "Announce", "Execute"] },
+            { verb: "Pick out", correct: "Select", options: ["Select", "Solve", "Remove"] },
+            { verb: "Run out", correct: "Deplete", options: ["Deplete", "Discover", "Select"] },
+            { verb: "Take out", correct: "Remove", options: ["Remove", "Depart", "Watch"] }
+        ];
+
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            questionElement.textContent = `Choose the correct synonym for: ${question.verb}`;
+            optionsElement.innerHTML = "";
+
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestionIndex].correct) {
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "#50fa7b";
+            } else {
+                resultElement.textContent = "Wrong! Try again.";
+                resultElement.style.color = "#ff5555";
+            }
+
+            setTimeout(() => {
+                resultElement.textContent = "";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsElement.innerHTML = "";
+                }
+            }, 1000);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

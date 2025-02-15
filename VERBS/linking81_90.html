@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synonym & Translation Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: #282a36;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6272a4;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #50fa7b;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a {
+            font-size: 25px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="result"></div>
+    </div>
+    <a href="./index.html">VERBS</a>
+    <script>
+        const questions = [
+            { word: "reach", correct: "attain", translation: "yetmoq", options: ["attain", "transfer", "announce"] },
+            { word: "kill", correct: "murder", translation: "o'ldirmoq", options: ["murder", "trade", "pause"] },
+            { word: "remain", correct: "stay", translation: "qolmoq", options: ["stay", "lift", "demand"] },
+            { word: "suggest", correct: "recommend", translation: "taklif qilmoq", options: ["recommend", "succeed", "slice"] },
+            { word: "raise", correct: "lift", translation: "ko'tarmoq", options: ["lift", "anticipate", "drop"] },
+            { word: "pass", correct: "transfer", translation: "o'tmoq", options: ["transfer", "construct", "perish"] },
+            { word: "sell", correct: "trade", translation: "sotmoq", options: ["trade", "recall", "stroll"] },
+            { word: "require", correct: "demand", translation: "talab qilmoq", options: ["demand", "purchase", "persist"] },
+            { word: "report", correct: "announce", translation: "xabar bermoq", options: ["announce", "permit", "compensate"] },
+            { word: "decide", correct: "determine", translation: "qaror qilmoq", options: ["determine", "study", "unlock"] }
+        ];
+        
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            questionElement.textContent = `Choose the correct synonym for: ${question.word} (Translation: ${question.translation})`;
+            optionsElement.innerHTML = "";
+        
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+        
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestionIndex].correct) {
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "#50fa7b";
+            } else {
+                resultElement.textContent = "Wrong! Try again.";
+                resultElement.style.color = "#ff5555";
+            }
+        
+            setTimeout(() => {
+                resultElement.textContent = "";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsElement.innerHTML = "";
+                }
+            }, 1000);
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synonym & Translation Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: #282a36;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6272a4;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #50fa7b;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a {
+            color: white;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="result"></div>
+        <div id="score" style="margin-top: 20px; font-size: 20px;"></div>
+    </div>
+    <a href="./index.html">Linking words Table</a>
+
+    <script>
+        const questions = [
+            { word: "Therefore", correct: "shuning uchun", options: ["shuning uchun", "shunga qaramay", "aksincha"] },
+            { word: "Although", correct: "garchi", options: ["garchi", "boshqa tomondan", "qo'shimcha ravishda"] },
+            { word: "Despite", correct: "ga qaramay", options: ["ga qaramay", "masalan", "shuningdek"] },
+            { word: "Moreover", correct: "bundan tashqari", options: ["bundan tashqari", "natijada", "aksincha"] },
+            { word: "Furthermore", correct: "shuningdek", options: ["shuningdek", "muhim", "teskari"] },
+            { word: "In addition", correct: "qo'shimcha ravishda", options: ["qo'shimcha ravishda", "foydali", "har tomonlama"] },
+            { word: "Nevertheless", correct: "shunga qaramay", options: ["shunga qaramay", "tushunarli", "shubhasiz"] },
+            { word: "On the other hand", correct: "boshqa tomondan", options: ["boshqa tomondan", "tez orada", "ba'zan"] },
+            { word: "In contrast", correct: "aksincha", options: ["aksincha", "tasodifan", "aniq"] },
+            { word: "For example", correct: "masalan", options: ["masalan", "ishonchli", "tushunarli"] }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        const scoreElement = document.getElementById("score");
+
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            questionElement.textContent = `Choose the correct translation for: ${question.word}`;
+            optionsElement.innerHTML = "";
+
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestionIndex].correct) {
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "#50fa7b";
+                score++;
+            } else {
+                resultElement.textContent = "Wrong! Try again.";
+                resultElement.style.color = "#ff5555";
+            }
+            
+            setTimeout(() => {
+                resultElement.textContent = "";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsElement.innerHTML = "";
+                    scoreElement.textContent = `Your Score: ${score} / ${questions.length}`;
+                }
+            }, 1000);
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synonym & Translation Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .quiz-container {
+            background: #282a36;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+        .question {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #6272a4;
+            color: white;
+            font-size: 16px;
+        }
+        .options button:hover {
+            background: #50fa7b;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        a {
+            font-size: 25px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz">
+            <div class="question" id="question">Loading...</div>
+            <div class="options" id="options"></div>
+        </div>
+        <div id="result"></div>
+    </div>
+    <a href="./index.html">Away</a>
+    <script>
+        const questions = [
+            { word: "Back away", correct: "Retreat", translation: "Orqaga chekinish", options: ["Retreat", "Leave", "Advance", "Go away"] },
+            { word: "Blow away", correct: "Displace", translation: "Uchib ketish", options: ["Displace", "Hit", "Push", "Drive away"] },
+            { word: "Carry away", correct: "Overexcite", translation: "O‘zini yo‘qotish", options: ["Overexcite", "Pick up", "Remove", "Move away"] },
+            { word: "Cast away", correct: "Abandon", translation: "Tashlab yuborish", options: ["Abandon", "Leave", "Displace", "Throw away"] },
+            { word: "Clear away", correct: "Remove", translation: "Tozalash", options: ["Remove", "Eject", "Fix", "Clean"] },
+            { word: "Drive away", correct: "Expel", translation: "Haydab chiqarish", options: ["Expel", "Move", "Send", "Drive out"] },
+            { word: "Fade away", correct: "Disappear", translation: "Yo‘qolish", options: ["Disappear", "Evaporate", "Flee", "Vanish"] },
+            { word: "Get away", correct: "Escape", translation: "Qochib ketish", options: ["Escape", "Leave", "Depart", "Exit"] },
+            { word: "Give away", correct: "Donate", translation: "Hadya qilish", options: ["Donate", "Sell", "Offer", "Give"] },
+            { word: "Go away", correct: "Depart", translation: "Ketib qolish", options: ["Depart", "Leave", "Quit", "Exit"] },
+
+            { word: "Keep away", correct: "Avoid", translation: "Uzoqlashish", options: ["Avoid", "Move away", "Stay", "Leave"] },
+            { word: "Move away", correct: "Relocate", translation: "Ko‘chib ketish", options: ["Relocate", "Move", "Go", "Leave"] },
+            { word: "Pass away", correct: "Die", translation: "Vafot etish", options: ["Die", "Rest", "Depart", "Exit"] },
+            { word: "Put away", correct: "Store", translation: "Joyiga qo‘yish", options: ["Store", "Hide", "Keep", "Save"] },
+            { word: "Run away", correct: "Flee", translation: "Qochish", options: ["Flee", "Escape", "Leave", "Depart"] },
+            { word: "Send away", correct: "Dispatch", translation: "Yuborish", options: ["Dispatch", "Send", "Deliver", "Transfer"] },
+            { word: "Take away", correct: "Remove", translation: "Olib ketish", options: ["Remove", "Take", "Carry", "Grab"] },
+            { word: "Throw away", correct: "Discard", translation: "Tashlab yuborish", options: ["Discard", "Toss", "Throw", "Drop"] },
+            { word: "Walk away", correct: "Leave", translation: "Tark etish", options: ["Leave", "Depart", "Exit", "Walk"] },
+            { word: "Wash away", correct: "Erode", translation: "Olib ketish (suv)", options: ["Erode", "Clean", "Remove", "Dissolve"] },
+
+            { word: "Back away", correct: "Retreat", translation: "Orqaga chekinish", options: ["Retreat", "Step back", "Walk away", "Go back"] },
+            { word: "Blow away", correct: "Displace", translation: "Uchib ketish", options: ["Displace", "Push away", "Blow", "Drive away"] },
+            { word: "Carry away", correct: "Overexcite", translation: "O‘zini yo‘qotish", options: ["Overexcite", "Take", "Move", "Lift"] },
+            { word: "Cast away", correct: "Abandon", translation: "Tashlab yuborish", options: ["Abandon", "Leave", "Throw away", "Toss"] },
+            { word: "Clear away", correct: "Remove", translation: "Tozalash", options: ["Remove", "Clean", "Eliminate", "Dispose"] },
+            { word: "Drive away", correct: "Expel", translation: "Haydab chiqarish", options: ["Expel", "Drive off", "Send", "Push"] },
+            { word: "Fade away", correct: "Disappear", translation: "Yo‘qolish", options: ["Disappear", "Evaporate", "Vanish", "Disappear slowly"] },
+            { word: "Get away", correct: "Escape", translation: "Qochib ketish", options: ["Escape", "Run away", "Leave", "Flee"] },
+            { word: "Give away", correct: "Donate", translation: "Hadya qilish", options: ["Donate", "Give", "Offer", "Share"] },
+            { word: "Go away", correct: "Depart", translation: "Ketib qolish", options: ["Depart", "Leave", "Exit", "Go"] },
+
+            { word: "Keep away", correct: "Avoid", translation: "Uzoqlashish", options: ["Avoid", "Stay away", "Move away", "Ignore"] },
+            { word: "Move away", correct: "Relocate", translation: "Ko‘chib ketish", options: ["Relocate", "Move", "Leave", "Shift"] },
+            { word: "Pass away", correct: "Die", translation: "Vafot etish", options: ["Die", "Rest", "Depart", "Leave"] },
+            { word: "Put away", correct: "Store", translation: "Joyiga qo‘yish", options: ["Store", "Put", "Arrange", "Keep"] },
+            { word: "Run away", correct: "Flee", translation: "Qochish", options: ["Flee", "Run", "Escape", "Leave"] },
+            { word: "Send away", correct: "Dispatch", translation: "Yuborish", options: ["Dispatch", "Send", "Transfer", "Send off"] },
+            { word: "Take away", correct: "Remove", translation: "Olib ketish", options: ["Remove", "Take", "Carry", "Retrieve"] },
+            { word: "Throw away", correct: "Discard", translation: "Tashlab yuborish", options: ["Discard", "Toss", "Throw", "Dump"] },
+            { word: "Walk away", correct: "Leave", translation: "Tark etish", options: ["Leave", "Depart", "Exit", "Walk off"] },
+            { word: "Wash away", correct: "Erode", translation: "Olib ketish (suv)", options: ["Erode", "Wash", "Clean", "Remove"] }
+        ];
+        
+        let currentQuestionIndex = 0;
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const resultElement = document.getElementById("result");
+        
+        function loadQuestion() {
+            const question = questions[currentQuestionIndex];
+            questionElement.textContent = `Choose the correct synonym for: ${question.word} (Translation: ${question.translation})`;
+            optionsElement.innerHTML = "";
+        
+            question.options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsElement.appendChild(button);
+            });
+        }
+        
+        function checkAnswer(selected) {
+            if (selected === questions[currentQuestionIndex].correct) {
+                resultElement.textContent = "Correct!";
+                resultElement.style.color = "#50fa7b";
+            } else {
+                resultElement.textContent = "Wrong! Try again.";
+                resultElement.style.color = "#ff5555";
+            }
+        
+            setTimeout(() => {
+                resultElement.textContent = "";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    questionElement.textContent = "Quiz Completed!";
+                    optionsElement.innerHTML = "";
+                }
+            }, 1000);
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>
